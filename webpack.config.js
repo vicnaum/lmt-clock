@@ -3,6 +3,11 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const fs = require("fs");
 
+// Check if certificate files exist
+const certFilesExist =
+  fs.existsSync(path.resolve(__dirname, "192.168.68.102-key.pem")) &&
+  fs.existsSync(path.resolve(__dirname, "192.168.68.102.pem"));
+
 module.exports = {
   mode: "development",
   entry: "./src/script.js", // Adjust if your main JS file is different
@@ -29,13 +34,17 @@ module.exports = {
     },
     hot: true,
     open: true,
-    server: {
-      type: "https",
-      options: {
-        key: fs.readFileSync(path.resolve(__dirname, "192.168.68.102-key.pem")),
-        cert: fs.readFileSync(path.resolve(__dirname, "192.168.68.102.pem")),
+    ...(certFilesExist && {
+      server: {
+        type: "https",
+        options: {
+          key: fs.readFileSync(
+            path.resolve(__dirname, "192.168.68.102-key.pem")
+          ),
+          cert: fs.readFileSync(path.resolve(__dirname, "192.168.68.102.pem")),
+        },
       },
-    },
+    }),
     host: "0.0.0.0", // Optional: to access your server externally
     port: 8080, // Optional: change this to your desired port
   },
