@@ -1,0 +1,83 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Changed from 'center' to 'space-between' */
+  align-items: center;
+  height: 100vh;
+  background-color: #282c34;
+  color: #e3e3e3;
+  font-family: "Arial", sans-serif;
+  text-align: center;
+}
+
+#clock {
+  font-size: 20vw;
+  margin-bottom: 1vw; /* Reduce or adjust this margin as needed */
+  color: white;
+}
+
+.clock-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  width: 100%;
+  padding-top: 3rem; /* Add padding to the top of the header */
+  color: #b9b9b9; /* A faded grey for the fine print */
+}
+
+h1 {
+  font-size: 2.5rem; /* Adjust as needed */
+  margin: 0;
+  padding-top: 1rem; /* Adjust as needed */
+}
+
+footer {
+  width: 80%;
+  padding: 1rem 0; /* Adjust padding as needed */
+  text-align: center;
+  position: relative; /* Changed from 'absolute' to 'relative' */
+  bottom: 0;
+}
+
+footer p {
+  font-size: 0.75rem; /* Adjust as needed */
+  margin: 0;
+  padding: 0.5rem;
+  text-align: center;
+  color: #797979; /* A faded grey for the fine print */
+}
+
+@media (orientation: portrait) {
+  header {
+    padding-top: 15vh; /* Add a bit of padding at the top in portrait */
+  }
+
+  footer {
+    padding-bottom: 10vh; /* Add a bit of padding at the bottom in portrait */
+  }
+
+  /* If you have specific margins set for the clock and coordinates, adjust them here as well */
+  #clock {
+    margin-top: 5vh; /* Adjust the top margin of the clock for portrait */
+    margin-bottom: 2vh; /* Adjust the bottom margin of the clock for portrait */
+  }
+
+  #coordinates {
+    margin-bottom: 5vh; /* Adjust the bottom margin of the coordinates for portrait */
+  }
+}
+
+@media (orientation: landscape) {
+  header {
+    padding-top: 1rem; /* Add a bit of padding at the top in portrait */
+  }
+
+  footer {
+    padding-bottom: 1rem; /* Add a bit of padding at the bottom in portrait */
+  }
+}
