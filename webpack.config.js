@@ -1,5 +1,7 @@
 const path = require("path");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const fs = require("fs");
 
 module.exports = {
   mode: "development",
@@ -12,6 +14,14 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./src/index.html",
     }),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: "src/manifest.json", to: "manifest.json" },
+        { from: "src/service-worker.js", to: "service-worker.js" },
+        { from: "src/icon-192x192.png", to: "icon-192x192.png" },
+        // Add any other assets you need to copy
+      ],
+    }),
   ],
   devServer: {
     static: {
@@ -19,6 +29,15 @@ module.exports = {
     },
     hot: true,
     open: true,
+    server: {
+      type: "https",
+      options: {
+        key: fs.readFileSync(path.resolve(__dirname, "192.168.68.102-key.pem")),
+        cert: fs.readFileSync(path.resolve(__dirname, "192.168.68.102.pem")),
+      },
+    },
+    host: "0.0.0.0", // Optional: to access your server externally
+    port: 8080, // Optional: change this to your desired port
   },
   module: {
     rules: [

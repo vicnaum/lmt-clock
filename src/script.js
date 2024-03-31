@@ -4,7 +4,7 @@ import "./styles.css";
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
-      .register("service-worker.js")
+      .register("service-worker.js", { scope: "/" })
       .then((registration) => {
         registration.update(); // Force the service worker to update
         console.log("Service Worker registered:", registration);
